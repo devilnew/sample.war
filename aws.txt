@@ -1,0 +1,365 @@
+interviw qustions
+mi data base server ki a typga acess 
+echaru chapndi anti
+
+ans:ma data base servrs application servi connect avuthye
+a application ki matram 1433 my sql ki 3306 ki allow chysamu
+bt memu mange chydanki enko machin use chystham	
+ma mangenment vm s unnye so daniki ssh allow 
+chysamu and a 2 ni allow chysamu enka 
+em allow chyaldhu
+
+NAT GATWY(only outgoing &reply not dirtcga connect kadhu )
+MGmt SERVER NUCHI DB SERVEKI LOGIN KAVALI ANTI
+SSH EC2-USER@10.1.10.100(DB SERVR IP)
+THN ENTER 
+YES
+NXT
+U CAN PEM FILE (KEY FILE)
+KEY NI NOTpD++ OPEN CHYSE DATA NI COPY CHYLI THN
+NANO SP-KEY.PEM
+E DANTLO KEY DATA NI PASTE CHYALI OK THN
+SSH -I SP-KEY.PEM EC2-USER@10.1.10.100
+THN R GET ERROR
+LL  (permistion s)
+(- ITS MENS  FILES )(-RW  ITS MENS OWNER)
+(R--GROUP)(-r OTHER)(R-4 W-2 X-1)
+NXT
+permistion evali anti 
+chmod 400 sp-key pem
+nxt
+ll
+(-r)
+nxt
+SSH -I SP-KEY.PEM EC2-USER@10.1.10.100
+thn enter new ip adress ok
+nxt
+ping www.google.com
+manam magnmt servr nuchi db servki connect avuthanam thn db servr
+ncyhi traiific bayatki paputhunm
+
+
+//
+connection timd out anti
+
+aslu connectvity jaragadam ldhu nd akkdo backend lo toutble lo edi prblm
+
+coonection refuused anti
+
+connect iendhe bt server start iyaka lo ssh connect kaldhu thn u cn try 1s again
+
+//
+curl http://169.254.169.254/latest/
+nxt
+curl http://169.254.169.254/latest/user-data  (manm a scrpt rasamu telusukovhu)
+curl http://169.254.169.254/latest/meta-data  (all vm inforamtion)
+
+without pem or key s use chyakunda manam login kavochu
+with pasw or not
+
+nano /etc/ssh/sshd_config
+ki velthi dantlo
+pswdautcation no ni () yes chyali
+c+o save
+c+x exit
+nxt 
+service ssh restart 
+thn we can ec2 user ki manm passwd pettukovali k
+nxt
+nu putty nucdi connect iye tappudu 
+aug lo antha delelt chyali 
+thn connect ditercly
+ 
+
+//
+auto scaling
+cret instace in install nginx thn
+install all nginx thn 
+sudo yum install stress -y
+nd pakge  (e time server restart chyali ok)
+nxt
+chkconfig nginx on y we use 
+nenu vm s restart ana avi automatiga on kavadam annamta ok thn
+nu on chyaledhu anti vm deploye avutye bt dani lopali nginx servr mnuvalga up chyli andhuki ela on echamu )
+
+
+nxt
+enko auto scaling instacelo nuchi
+run chyali thn e cmnd tho mali stress evali stress -c 8 -t 20m
+
+thn mnali          stress thesiveyali anti 
+c+c
+*************************************
+
+how to create ec2 instance
+
+1)ebs volumes
+2)elastic load balencers
+3)auto scaling
+4)ami
+5)snapshots
+6)security groups
+7)elastic ip
+
+
+
+
+
+
+
+
+instance store
+8 gb and 4 gb
+ assin iendha or not ela tesukovali anti linux lo e coomd use chayli
+cmd    : lsblk
+anthi amnam enni volm s and sub fldr scretd iyayo chpthudhe 
+
+NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0   8G  0 disk
++-xvda1 202:1    0   8G  0 part /
+
+emdia /ephheriya anti isntace delet iendhe ani 
+
+VOLUMS
+**********
+Create chysen volmes 2gb manm vadukoavi anti linux lo ela chyali 
+1st) fdisk /dev/xvdf
+m                m=help
+n              crrate new partion s
+2 times enter nokali
+w               save   
+
+[root@ip-10-1-1-29 ~]# lsblk
+NAME    MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+xvda    202:0    0   8G  0 disk
++-xvda1 202:1    0   8G  0 part /
+xvdf    202:80   0   2G  0 disk
++-xvdf1 202:81   0   2G  0 part
+[root@ip-10-1-1-29 ~]#
+
+
+xvdf is like disk lantedhe dani partion chysanu thn enko drive (d) la adi blckga nd unlocatga untadhe thn right click alloct new sample volm chyali thn formt chyali daniki manm okka file sysytm create chyali
+adi drive (d or xvdf1) ki ok  in liux lo
+
+1st)
+mkf
+mkfs.ext3 /dev/xvdf1
+ok file sysytm crtd 
+thn mount chyali dani okka flder create chyali
+in linux type lik this
+(df -h differnt drives chupisthye in lunx) 
+
+mkdir /2gbdrive
+entr
+ls /
+
+thn mount chyali
+do this linux
+
+mount /dev/xvdf1 /2gbdrive/
+enter
+df -h
+enter
+u show blow
+
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        475M     0  475M   0% /dev
+tmpfs           492M     0  492M   0% /dev/shm
+tmpfs           492M  484K  492M   1% /run
+tmpfs           492M     0  492M   0% /sys/fs/cgroup
+/dev/xvda1      8.0G  1.1G  7.0G  14% /
+tmpfs            99M     0   99M   0% /run/user/1000
+tmpfs            99M     0   99M   0% /run/user/0
+/dev/xvdf1      2.0G  3.1M  1.9G   1% /2gbdrive
+
+mount done
+nxt
+ls /media/ephemera10 +manm    create chysena test files untaye
+dani 2gb driveni copy kuda chysukovchu
+lik this in inux
+
+ls media/ephemera10
+ls /2gbdrive
+cp * /2gbdrive
+cp *.* /2gbdrive
+cp /media/ephemera10/testfile* /2gbdrive
+
+data copy
+like this 
+
+[root@ip-10-1-1-29 ~]# ls /2gbdrive/
+lost+found  testfile.1  testfile3   testfile4   testfile5
+testfile1   testfile2   testfile32  testfile43
+ 
+thn snapshot chyse okka mechain bulid chyali ok
+  THN ls / koduthi adi before backup kanipchalai 
+ 
+
+
+
+*****************************************************************************************************
+1)VPC
+A)CREATE VPC NAME SANDP-VPC
+AND RIGHT CLICK IN MOUSE ENBLE DNS HOSTNAME
+IPV4 CIDR BLOCK OR IP RANGE :10.50.0.0/16
+B)CREATE SUBNET AND ENBLE AUTO ASSIGN IP
+WEBSERVERS : 10.50.1.0/24 - US-EAST-1A
+APP SERVER : 10.50.2.0/24 - US EAST-1B
+BDSERVER  : 10.50.3.0/24  - US EAST-1C
+ 
+C) CREATE INTERNET GATEWAY &ATTCH VPC
+D) USE ROUTING TABLE & ADD SUBNET TO IT
+E) CONFIG ROUT TOWARDS IGW SO THAT VM S CAN SEND THE TRAFFIC OUTSIDE VPC
+F)DEPLOYE VMS ONE IS US-EAST-1A AND OTHER IN US-EAST-1C AND CHECK PUTTY WWW.GOGGLW.COM COMMUNATION
+
+
+ 
+10.50.3.0/24
+************************************************************
+////////////////////
+
+1} kamm tech elb run chyali sevrv
+
+
+
+****
+1st chyali
+
+yum install httpd
+y
+service httpd restart
+vi /var/www/html/index.html
+
+2) chyali
+
+<body bgcolor="red">
+<h1>vlearn info tech</h1>
+</body>
+
+
+
+
+
+
+
+
+
+*********************************
+sree harsh
+ advnced lo pettali 
+
+#!/bin/bash        (a location lo run chyamanu anutunanmu)
+yum update -y      (1st update chyamantunavu) 
+yum install nginx -y  (nginx is server)
+service nginx start    ()
+chkconfig nginx on
+
+echo "54.221.207.100 www.google.com google" >> /etc/hosts
+echo "54.221.207.100 www.facebook.com facebook" >> /etc/hosts  
+*******************
+#!/bin/bash
+yum install httpd -y
+echo'<h1>welcome to java home </h1>'>/var/www/html/index.html
+chkconfig httpd
+service httpd on
+
+
+
+
+*********************
+#!/bin/bash
+sudo yum
+ist start nnd stop
+service nginx startech -1
+
+#!/bin/bash
+yum update -y
+yum install nginx -y
+service nginx start
+yum install tree -y
+echo "54.221.207.100 www.google.com google" >> /etc/hosts
+echo "54.221.207.100 www.yahoo.com yahoo" >> /etc/hosts  
+
+
+
+mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport fs-01a7abe1.efs.us-east-1.amazonaws.com:/ /newtest
+
+SYSTEM MANAGER
+
+
+
+
+***********************************************************************************
+imp  USE NW ALL 10 VERSION S
+*
+SANDP-VPC   10.1.0.0/16 
+
+
+
+
+
+F
+
+subnet-1   : 10.1.1.0/24
+
+subnet-2   : 10.1.2.0/24
+
+subnet-3   : 10.1.3.0/24
+
+10.1.1.0/24
+*****************************************
+
+
+
+HP CIDR : 10.10.0.0/16
+---------------
+
+VPC NAT-SUBNT  : 
+10.1.5.0/24
+ 
+**************************************************************************
+
+SREE HARSH NGI NX SERVER &WEB server chudaniki edi putty lo run chyslo
+
+nginx---(amazon-linux-extras install nginx1.12)
+#!/bin/bash                  
+yum update -y
+yum install nginx -y
+service nginx start          (/bin/systemctl start nginx.service)
+chkconfig nginx on
+
+
+service nginx status                                     c+o --save    c+x--exit   c+w--search
+
+
+sudo amazon-linux-extras install epel -y
+sudo yum install stress -y
+nxt
+
+
+
+
+nano /usr/share/nginx/html/index.html
+
+
+***********************************
+
+N/INTRFRNC  
+PRIMARY IP  
+10.1.1.100
+***
+PRIMARY IP NAT GAY 
+10.1.5.100 
+
+
+**************************************
+EC2 OR ECE
+***********
+NAKU CONSOL LDHU BT I WANT KONW ALL INSTACE DETALIS 
+PUTTY LO COMAND 
+ec2-metadata
+
+or 
+some dtalis in putty abot instace
+
+curl http://169.254.169.254/latest/ 

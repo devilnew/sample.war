@@ -1,0 +1,475 @@
+GIT-versio control sftw
+distbutd repsitar mangent not directly interact with repstry 1st they devlp d code they local machinthn coomit d code local machin to centrizd repistry
+svn --centrilizd repistry manget devplers direct interact with centerli zd repaistr 
+resptory-github.bitbuckt
+
+git init--intial in .gitclss
+
+
+git status -s-------to show shartcart
+cat 1stfile.txt---view s file
+git log --oneline --to show shart cart logs here
+git cheakout cmt-id--a time ki id lo manm em chges jaregye telusukovhu bt adi permnt save kadhu biji only read only
+edi commit level -cekout
+nxt
+file-level chekout anti permnt ga untadhe buji
+1st
+git checkot 1stfile
+nxt
+a fileo changes chyse git add,and commit
+nxt
+new branch chyalianti 
+git cheackout -b good
+nxt
+git revert amti old commit ki pothamu
+bt adi kuda mali new commit ga vosthudhe
+GIT revert HEAD
+
+nxt
+
+rebas anti manku anni commits anni kalii okka commit ga kanapadali anti we use rebase
+git rebase -I HEAD~3 HEAD~5
+delet kuda use  
+
+
+
+git remote add origin https://github.com/devilnew/last.git
+mearg|conflect
+both persons wrk on same file nd same line 
+(2line)
+
+1st
+mkdir gitpratiec
+nxt
+cd gitpratiec
+nxt
+mkdir first
+nxt
+touch sample.txt
+nxt
+vi sample.txt
+hi sandeep
+nxt
+ls -ltra
+nxt
+touch hello
+nxt
+vi hello
+nxt
+git add .
+nxt
+git commit -m
+nxt
+git push origin master
+u git eror thn u crete new repostarty thn a lik git evali
+ok
+nxt
+git push orgini master
+nxt 
+open hello git hud see d that file 
+nd write 2nd diretly ok thn
+cm to desktop git
+nxt
+vi hello
+nxt
+git add .
+nxt
+git commit-m
+nxt 
+git push orgini master
+u wl get error (merge |mSTER)
+nxt
+git pull
+nxt
+git pull orgini master
+nxt
+git status
+nxt
+cat hello
+nxt
+vi hello
+nxt remov unwantd s nd save
+nxt
+git add .
+nxt
+git commit -m"
+nxt
+git push origin master
+th 
+nxt
+u see git hub file hello -u wel  see 2 or 3 liens chhnge chysenavi
+ok 
+
+===================================================
+nxt
+git branch
+git branch -a (all branchs)
+git branch --lst ( all list
+)
+ls -ltr
+nxt
+git branch bugfix
+nxt
+git branch --list
+nxt
+git checkout bugfix
+thn master change to bugfix ok
+nxt
+cread 1 file 
+vi newbugfile
+nxt
+ls -ltr
+nxt
+thn save
+nxt
+git add .
+nxt
+git commit -m"newbugfix"
+nxt
+git push origin bugfix
+thn newbugfix is save one brnch 
+&bugfix okk
+nxt
+cheout branch master
+thn 
+git merge bugfix
+nxt
+ls -ltr
+thn
+git add 
+nxt
+git commi -m"megging"
+nxt
+thn newbugfix is save both branch new bugfix 
+nxt
+git branch  -list 
+nxt
+a branch lo newbugfix save chysavu ga 
+k thn bugfix ni delet chyali ok
+cmnd:git branch -d bugfix
+nxt
+ela chysthi adi delet kadhu git hub lo so 
+e cmnd kda run chyli
+cmdn:git push -d bugfix
+thn delet avuthyai anni ok
+nxt
+git hud lo diretga new branch creayd chysukovhu
+featurea ani okth
+nxt
+git branch --list 
+git branch -a
+nxt
+git  featch (anti avro creat chysena branch ni kuda manm thesukovhu)
+nxt
+ls -ltr same fill all brNCH
+===================================
+GIT TAG S
+
+mainly used for to relese praticular version of code or softwear
+
+
+2typs tag
+a)light weight tag
+b)annotaged tag
+
+a)-nthg is after commit we cn give one version 
+no mgs no auther name we cn't give
+jst we cn creatd tag.thts it
+ b)
+more meningfull tag.we cn write here user name who auther 
+who cretd tag nd y he creatd mgs alos we cn give
+y we cn cretd tag and which perpouse 
+relese the tag thos things we cn give mgs .. 
+
+cretd tag
+annotaged tag
+cmnd:git tag -a v1.0 -m "this relese for latest changes"
+nxt
+git tag
+o/p
+vi.0
+nxt
+git show v1.0
+nxt
+git push origin master
+nxt
+
+vi sam
+nxt
+git add .
+nxt
+git commit -m"fsf"
+nxt
+cretd light weight rag
+git tag v1.1
+nxt
+git tag
+nxt
+git push origin v1.0
+nxt
+u cn see git relese option ok 1 version is cm
+v1.0
+nxt
+git log --oneline
+nxt
+git tag v1.2
+nxt
+
+git tag
+nxt
+anni tags okkasari send chyali
+git push origin --tags
+nxt
+one by one tag delete chyali anti &localga delet chyali anti
+git tag -d v0.1
+nxt
+git hub lo kuda delete chyali anti
+git push origin :refs/tags/vo.1
+nxt
+all tag delete chyali anti
+git tag -d $(git tag -l)
+
+nxt
+some tim iye tag s deleted in local linux lo
+avi back ravli  anti
+featch cmdn use chystham
+git fetch
+nxt
+ o/p
+tag s anni back vosthye
+nxt
+git tag
+u wl get all tags
+nxt
+thn git hub lo kuda all tag s delet chyali anti
+cmdn: git push origin --delete $(git tag -l)
+nxt
+
+git merge&rebase
+1st new repastry creat chyali thn new floder git ani cre
+cret chyali th dani lopal nuchi git bash open chyali
+nxt 
+git clone https://github.com/devilnew/sandpmerge.git
+nxt
+ls -ltr
+nxt 
+cd pandumerge
+nxt
+vi mfile1.txt
+nxt
+thn git add .
+nxt
+git commit -m"mfile1"
+nxt
+git push origin master
+nxt
+u see in git hub reprty
+nxt
+vi mfile2.txt
+nxt
+anni git coomt-m"m2" anni chyali ok
+nxt
+git push origin master
+nxt
+okka feature branch cretd chysukovali 
+git hud lo thn
+nxt
+git fetch
+nxt
+git checkout feature
+nxt
+ls -ltr
+nxt
+feture branch lo
+vi gtiffile1.txt
+nxt 
+git add .
+nxt
+git commit -m"f-file1"
+nxt
+git log
+nxt,
+git checkout master
+nxt
+vi mfile1.txt
+nxt 
+git add.
+nxt
+git commit "m3"
+nxt
+git log
+m1
+m2 m3
+nxt
+use git merge --squash feature
+nxt 
+commit -m "m3"
+nxt
+git log
+m1 m2 m3 merge
+nxt
+git checkout feature
+nxt
+git log
+nxt
+
+vi f-file2
+nxt
+git add .
+nxt
+git commimt -m" f2"
+nxt
+git rebase master
+nxt
+git log
+nxt
+git checkout master
+nxt  
+git log
+nxt
+git rebase feature
+nxt
+git log
+all f-m 
+file s vosthye pk
+merge anti local linux li ls -ltr anti
+onle files vosthye
+bt commit ravu 
+2 branch lo unna 2 files data ni okka file rayali anti we use merge 
+
+ok 
+thn rebase lo vosthye commits& files vosthye
+git rebase 
+is commit s delet nd edit renmae kuda chysukovhu 
+cmnd;delet ki
+git rebase -i head~5
+nxt
+commit name chgeki 
+git rebase -i head~1
+
+nxt
+rebase nuchi bayatiki ravali anti cmdn:rebase --abort
+nxt
+all commit data ni  antha okka commit ki pampichu
+squash anti ani mixd ()2 commit mix chyse okkati coomit chyvochu
+
+nxt
+
+merging anti 2 differt brnach merge chyochu
+git merge feature
+nxt
+git brnach -d feature (delet branch)
+
+nxt
+git checout,git resent revert,stash,
+
+nxt
+vi hello 
+vi sam
+vi newf1
+nxt
+git status
+nxt
+checkout used 2 perpous 
+changeing brnach 
+if u want undo 
+local wrking	copy chnages ki
+nxt
+manm perviouslga chysena file s mali avi file edit chyali
+
+git reset after commiting perpus
+git revert is after pushing reptry perpus
+
+gti reset mali back velthudeh mens 3 faces unyega danli 1 stage ncuhi enko stage back visthudeh(gree to red)
+
+git revert  anti patha commit ki velthamu perviosga a file ela undho ala akkadki velthamu k thn mali new commit ga save iendhe
+
+git revert head ot head~2 (use cmnd enni commits back vellai anni vellochu ok)
+git revert -n master~6..master~1(edi eaxctlyga anni commits back velthudhe ok)
+
+wrkspc lo unna files anni delete chyali anti
+git clean -n 
+git clean -f
+thn nxt
+
+
+git checkout .  (3 times)
+nxt
+git status
+nxt
+ vi sam
+nxt
+git add .
+nxt
+git commit -m "rest commdtion"
+nxt
+git reset --head~1
+nxt
+delete all 
+mens git reset --hard head~1
+git reset --soft HEAD~1
+its delete all area ok
+commiut delet chyvochu bt we lose our data in revert
+(git reset cid --hard)
+nxt
+nu git hub push chysavu bt mali back ravali anti 
+we use revert cmnd
+nxt
+vi hello
+git add .
+git commit -m"git revet"
+nxt
+git push origin master
+nxt 
+git log
+nxt
+cat hello
+nxt
+git log
+nxt 
+git revert cid
+anti mali toatlga edit chyaka mundhu ela undho alagi untadhe 
+nd new commit creat avuthudhe like git revert
+nxt
+wrk space lo unna files delet chyali anti 
+git clean -n
+git clean -f
+nxt
+ls -ltr
+nxt
+cat hello
+nxt
+
+git stash
+
+
+vi hello
+cd ../first
+nxt
+vi newbufix.txt
+new stash
+history what r chages done they tell us
+switch to 1 prject to other project
+nxt
+vi sam 
+nxt
+git stash
+nxt
+cd ..
+cd 
+enko okka project ki vellipo 
+like madhu@/deskstop/gitpratices
+thn
+vi hello
+nxt
+git 
+add 
+commit
+thn git push origin mastr
+nxt
+cm back 
+cd ..
+cd git/
+nxt
+git stash pop  (what r chges done perviously)
+anti mali back vosthudhe wrk space ki red colorlo

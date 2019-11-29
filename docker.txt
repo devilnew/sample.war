@@ -1,0 +1,81 @@
+docker pull nginx
+nxt
+dokcer images
+nxt
+okka imgs reun chyalio anti cmnd
+docker run -it nginx /bin/bash
+nxt
+a contatiner create avuthudhe thn a container lopaliki velthuhde
+nxt
+uname
+nxt
+a container nundi bayatki ravali anti 
+contlo p+q
+nxt
+mali a container lopaliki vellai anti
+docker attach c-id
+nxt
+nginx service nd web page open avli anti
+a container service ni start chyali anti use cmd 
+service nginx status
+service nginx start
+thn open ur public id
+o/p nginx page
+
+nxt
+thn
+a container lopaliki vellaka 
+un used anni delet chysthudhe (like ifconfig,ping)anni
+mali instlla chyali antiu 
+cmmnd
+apt-get update
+nxt
+apt-get install net-tools
+nxt
+apt-get install iputils-ping
+apt-get install ping
+nxt
+apy-get install nano tree -y
+nxt
+enko new nimms/apache img downloAD chysukunamu
+thn
+a img run chysthunamu 
+root@ip-10-1-1-125:~# docker run -d -p 8080:80 nimmis/apache /bin/bash
+d=is detach mod is contanier run iye mali back to cmnd promt vosthudhe
+note
+
+okka contnair ni ela connect avuthvu anti (public-ip to)differt ports tho connect kavochu
+okkati systm
+nxt
+a)docker stop $(docker ps -aq)
+only up lo unnayi
+
+b)docker rm $(docker ps -aq)
+
+ docker ps -aq
+only conatiner-id s
+
+1st vedio is done
+=================================================================================
+
+--rm = anti remove anamata thhn contanir exit chysthi automaticga delet avtudhe ok
+-it=anti contanir lopaliki login avutharu (chnges chyali anukuna we use this)
+-dit=ditached mode mens contanier creat iye thn bayatki vostharu thn backend lo run avtudhe
+nxt
+docker hub ki push chyali anti 
+1st )docker commit c-id 7869/ubuntuupate:1 
+chsthi okka repostry cretd avuthdhe thn
+thn docker login
+nxt
+docker push img-name
+nxt
+okka conatiner verifiy chyali anti 
+docker inspect c-id
+
+nxt
+ docker volume ceate testvol1
+
+docker volumes 
+contaners appudu iti delet chysthamu appudu data nd volume anni delet avututhude
+akkad save kadhu nd jst like insurence okkati poyena okkati untahde
+contaners stop chysthi volume s em kadhu ok

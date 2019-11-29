@@ -1,0 +1,1180 @@
+  ec2-apllication pettali anan e anan chyali anna manku sevr s kavali
+lunch instance lo
+4 step AMI
+quick start:aws deafults ga isthudhe jst like hotal ainu card a ec2 kavli
+my ami:custm desh jst like mi own ami crest chyse ekkada pettukovochu
+:aws market plc:enko plc degara nucchie tesukoni ravadam  3rd paty aws 
+softwr copny product valu  ammutahru 
+community ami:opnsource frees avarina use chysukovu
+note:nenu srcpt deploye chtsthunanu adi deployr avuthuanupudu newn machin img echanu 
+okka location lo vosthudhe okka fail iendhu y:miru ami check chysar 
+evry lcoatio ami differnt bt same os
+
+generation:what typye of hardwr ec2 lo edo phy servr lo run avutdhue a server new or old a type yr ani telusthudhe
+numbr entha akkava untudhe antha new 
+m5 new generation s 
+tendcny
+dedcated mi okka server run avuthudhe &
+advend detalis:
+manku avsram unna a sevr ni install chyaldi before srvr start iyka evi automatic run kavali anti
+we use this k its also cld bootstping
+advencd details  
+bin/bash anti a location run chyamtunanu
+==============================================
+volume: 2 typs
+ebs elstic block storege
+advntegis
+its permnt stoage off 0r on iyan data em kadhu
+you cn incres ebs voluem
+differtn typs ebs volum are avalabule ssd  machincal drives
+we can the remove d volue from 1 server nad attach other servr
+
+all insst store adi anni server s avalabule undadhu)(
+instore store:akkada untadhe anti machin okka local strorege lo untadhe so
+dani instace store antaru thn edi machin ki connect avuthudhe
+its tempry server
+its fixd
+one type of stoge is avalbule
+we can"t remove is volume and atacvh vlue
+
+big storge
+anti ebs stoges(san/nas)
+nxt
+spot request:manam bid chyavochu nenu enthi chysthanu ani
+
+
+vpc okka infraction cretd chysam
+===============================================================
+a subnt iti diretcga internwt igw ki connect kadho adi privte n/w
+same abou------------------------------ avuthudho adi publicn/w
+
+y natgatwy
+mi private subnt lo unna traffice ni intertki reach kavali anti we use nagtgay ok
+and
+natgway only trrfic bayatki pamputhudhe
+lopapaliki ranivadhu ok
+
+
+nagtway db servr lo okka  (windows )update kavali aninppudu trffic bayaki velli
+mali reply vosthudhe db server ki ok 
+(exits trific bayta nuchi strt avali thn lopala nuchi start irn)
+edi natgawy lekunda chylemu  ok
+=================================================================
+natgway
+creatd chyaloi st
+creat nat gatway danlo 1st subnt-1a thesukoni
+thn new elastoc -ip evali
+nxt
+okka roting table creat chyali 
+danlo nat subnt okkati assocat chyali
+thn
+routers lo igw kakunda natgay di ip ravli
+
+nxt
+1a-servki connect avuthnu thn
+1a serv nuchi db server ki vellati 
+1st
+no.pem file ni noted++ open chyse a code acopy chyali
+nxt
+puttylo
+nano sp-ley.pem
+lopali velli a code paste chyali
+nxt
+ssh -i sp-key.pem ec2-user@db-ip
+error vosthudhe
+unproted private key
+nxt
+ll
+anit 
+-rw-r-r--
+3 permistion unye (rw =OWNER
+R=GROUP 
+R=OTHER)
+permission assign chyali ani use
+cmdn: chmod 400 sp-key.pem
+nxt
+ssh -i sp-key.pem ec2-user@db-ip
+o/p
+db servr ki connect avuthamu ok
+
+
+
+
+
+nxt
+okka instance anni deatles anii mana machin lo chudali anti '
+cmnd
+curl http://169.254.169.254/latest/
+nxt
+curl http://169.254.169.254/latest/user-data/
+nxt
+curl http://169.254.169.254/latest/meta-data/
+nxt 
+instance type chudali anti
+curl http://169.254.169.254/latest/meta-data/instance-type
+nxt
+full information
+is ec2-metadata
+====================================
+
+auto scaling steps
+-------------
+1st all nginx install chyali
+thn
+stress tool install chyali
+chkconfig nginx on
+(y anti apudu server stop iti automaticga re- or start avdaniki)
+nxtoiui ngjn
+instacl right click echi creat img analai
+thn snapshot kuda cretd avuthudhe automatichga
+nxt
+loadbalnc crete chyali
+dantlo a instance ni add chyodhu 
+(y anti autoscling auomatiga avi vm sadd chysukovali)
+nxt
+(autoscling )nenu appudu addtionalga instaces ni add chyali n/w periginappuda
+autoscling lo ctretd anli 
+thn
+mali instanc ala creat chysthamo ala chyali
+bt linux adi select chysukovodu
+manm alredy crete chysendhe ami
+adi select chysukovali okk
+nxt
+lst ki
+create auto scling grup 
+lo
+vpc evali
+thn subnts
+NXT
+advnced lo
+alrrm ani evali ok
+nxt
+new instance creat avuthdhe
+nxt
+laod bln lo dns id run chyali 
+nxt
+
+auto scrling instac ki login iye load pettlai
+so dnai
+autoimg vm ki login iye
+danli 
+cmnd:stress -c 8 -t 20m
+run chyali thn load paduthudeh vm mida
+thn
+nxt
+new 2 instance creat avuthudhe (y anti manm echmu kadha 40 % kanti cpu high iti 2 instcne creat avli ani k)
+nxt
+contol+c type chysthi
+e vm s mida load stop chyshti a vm 1st delet avuthdhe ani 1st edi creat iendho adi 1st delet avuthdhe ok
+--------------------------------------------------------------------------------------------------------
+vpc peering
+1st 2 intance crt chyali thn tatand info 2 sepate vpc nd igw nd rtb all evali ok 
+thn vpc perring coonection lo accepting request ani y anti akkada iti nu peering estvo akkadiki
+velli accpeting anni ok thn perring start 
+----------------------
+vpc perrig lo  roting tble lo rotes lo back hole
+y anti routing delet chyakunda vpc connectin delet chysthi ela backhole vosthudhe
+--------------------------------
+nxt
+okka instance anni deatles anii mana machin lo chudali anti '
+cmnd
+curl http://169.254.169.254/latest/
+nxt
+curl http://169.254.169.254/latest/user-data/
+nxt
+curl http://169.254.169.254/latest/meta-data/
+nxt 
+instance type chudali anti
+curl http://169.254.169.254/latest/meta-data/instance-type
+nxt
+full information
+is ec2-metadata
+nxt
+putty error 
+connection timdout :anti aslu connection jaragaldhu backend lo edo prblm i men routingtable lo
+connecton refused:connet iendhe bt connectin refused iendhe y anti server lo start iyaka kuda ssh enka start kaledhu
+thn u cn try 1s it wrk
+---------------------------------------------------------------------------
+systm manger service(SHM) 
+run cmd:
+manaki kavalesa cmnd s run chysukochu 
+okka new user crest chyse daniki access evali ani we run cmnd
+thn
+iam lo
+user anti manalati vall kosam anni user nd passwd creting anni ekkada thn 
+role anti
+okka aws service nuchi enko aws service access chydaniki role use chystharu
+nxt
+iam role
+thn ssmf =full access ok
+thn name myrole1
+nxt
+instance lo right click 
+instc setting lo auto replce-iam lo manam creat chysena role evali ok
+nxt
+creat run cmnd lopaliki velli aws run shell scrit clink chyali
+a intstance kanipichali k
+thn a instance kanipichali ani 
+instacki log in iye nxt 
+e cmdn ping 
+ps -pf
+
+/usr/bin/amazon-ssm-agentnxt
+run this cmd
+nxt
+all instance selet chyali
+thn 
+cmnd lo
+#!/bin/bash
+useradd sandeep
+yum install tree -y
+
+thn run
+nxt
+instcs lo 
+cmnd:cat /tmp/passwd
+anti
+manam cret chysena sandeep uesr cretd avuthudhe ok
+nxt
+cd /etc/
+nxt
+tree
+anti anni floder s open avuthaye ok
+nxt
+elaa praticularga nenu anukunavali user s cret chyli anukunti
+we use tags ok 
+go instce add tag 1 env ,prod
+2 env testing
+nxt
+#!/bin/bash
+useradd sandeep
+useradd baby
+thn
+mali kothaga instacs login iye mali ps -ef anii run chayli ok
+thn userd crtd ok 
+
+
+ ==============================================================
+s3
+ n storage(simple storage service)or (object storagw jst like googledrive)
+ec2 snapshot img data saved in s3
+
+we can save any file in s3
+3 typs storge S
+s3
+standard
+99.99% availability over a given year(52.56m) unpland down time
+durabulity of 99.999999999% objects
+(1000 files in 1000 yearlo u will lose 1 file)
+
+standard-ia
+99.9% availability over a given year(8.76) unpland down time
+durabulity of 99.999999999% objects
+(1000 files in 1000 yearlo u will lose 1 file)
+
+REduced reduency
+data em imp kadhu so kmchm update vosthne avi delet iyna em kadhu ani ok
+copy mana degara untadhe copy chysthadupu chpthmu nenu 1 wk uchuthanu thn delet chystha
+
+
+(
+
+availability
+------------
+how safe ur service
+availability anti s3  uplo undatam anti e page panichydam thn page cn"t be disply rakunda s3 lovochina files nenu cusukovadm
+avalabulitr 
+mi service avalabulites lo undatam anti e service avalible
+ durabule anti mana market lo vegtables  thesukoni ravadam avi ipovdmdam
+nxt
+linux lo ditrga bkte ni cretd chysukochu
+aws s3 mb s3://saninfo01=crtd
+aws s3 rb s3://saninfo01=remove
+)
+exple:
+avalabulitr 
+mi service avalabulites lo undatam anti e service avalible
+99.99% availability over a given year(52.56m) unpland down time
+suddnly ga servr downkavadm some prblm and unpland down time 
+
+(durability
+----------
+suddnga miru logi in chysaru mana files mana prayim lekunda files lose delet kavadam adi somthing wrg in amz
+how safe in ur data
+)exmple::;
+durabule anti mana market lo vegtables  thesukoni ravadam avi ipovdmdam
+durabulity of 99.999999999% objects
+
+nxt 
+linku okka vm crate chyse danlto edi run chyali thn error vosthudhe
+
+nxt
+versing
+
+1st version enble chysukovali avru delet chysena versin ga credt avurhudhe nd thn
+ nu delet chysaka thn show ani typ chyse thn delete makr ni delete chyali thn dani kindhi mali back buket vosthudhe ok
+data save chysthudhe  
+nxt
+server access loging 
+1st okka buckting nake eavli thn aslu avru access chysthunaru 
+akkada nundi avru acess  total details logs lo note ani poye thn s3 lo
+ buket ga save avuthudhe
+ok 
+nxt (wildrydes github) aws-samples/aws-serverless-workshops
+static website hosting
+okka buket ni okka website ga chnge chysukovchu
+nxt
+object-level loging
+save chysthudhe cloud trial antha events antha
+evaru em chysthunaru event lo read &write ani save chysthudhe
+nxt
+transfer acceleration 
+data fastga securega upload chysthudhe thn we get end-point
+ nxt
+events
+avaru uplode chysthuarund avru download chysthuanru anidi alrts mails pettukovhu
+nxt
+requester payes
+s3 5gb free buket not count
+file uplod ==write chydam 2000 item rasukovhu
+file read =2000 read chyskovhu
+ 
+
+bauket  to  buket cp and data delete iyana mali ravalanti edi cmnd use chyshtunam
+(aws s3 sync s3://source_buket-name s3://new buket-name
+aws s3 sync s3://www.mydevil-souce.com s3://saninfotch01 --source-region us-east-2 region us-east-1
+nxt
+ami user creat chyali thn 
+nxt
+asw configure (ani kottali)
+nxt
+access key nad secrite key ni linux lo paste chyali
+nxt
+mali run chyli edi
+
+aws s3 sync s3://www.mydevil-souce.com-ohio s3://saninfotch01 --source-region us-east-2 region us-east-1
+nxt
+file uplode chysthi write 
+file refresh chysthi read anamata
+nxt
+replication:
+1st anni delelt chyali 
+source buket in mumabi to
+denstination buket usa lo
+same  cross region repliccatio
+
+anti okka buket data ni enko buket ki transfer chydam
+oho nenu sandeep (data )
+antha sandeepkumar(n-us-easrtki ) copy avuthudhe
+nxt
+
+replika: em chysthuhdena ti unna data ni replika chyadhu
+new data ni replika chysthudhe
+so manm daniki buket creat chysenappudu edi creat chyali
+nxt
+cross region repliccation anti
+source buket in mumabi to
+denstination buket usa lo
+1st 2 buket ctrd chysukoni thn go to repliation add  
+entrn destnation buket name
+nxt
+iam role new crtd
+nxt
+source lo em ana add chysthi avi denstination kuda add avuthye ok
+thn
+prifix filter is starting ede undali adi filter iendhe adi dentination kuda untdhe 
+
+nxt
+permsiion
+2 typs 1)access control list 2)bucket ploice
+thn cors configuration anti mana bucket ni veri vallaki access evadam nd shear chyskodam induvial kadhu domainki
+nxt
+buket-polices
+-------
+
+only read 
+{
+  "Version":"2012-10-17",
+  "Statement":[
+    {
+      "Sid":"AddPerm",
+      "Effect":"Allow",                  ..imp =allow or deny
+      "Principal": "*",                  ...a userni 
+      "Action":["s3:GetObject"],           
+      "Resource":["arn:aws:s3:::examplebucket/*"]
+    }
+
+principla :avarani a userni
+main effecy :allow or deny
+action
+(s3:getobject :anti read only
+          put-object:write-only
+          post-objrt:anit edit only)
+nxt
+resouce:avaru abucket evali anukuntunaru bucket name(/* :anti a buket lopala em iyna
+         
+nxt
+only sapfic ip adress
+
+{
+  "Version": "2012-10-17",
+  "Id": "S3PolicyId1",
+  "Statement": [
+    {
+      "Sid": "IPAllow",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": "arn:aws:s3:::examplebucket/*",
+      "Condition": {
+         awsAddress": {"my-ip]        
+      } 
+    } 
+  ]
+nxt
+or
+edi kakunda polica generate untadhe diterga evochu ok
+
+
+
+
+nxt
+analytic 
+akkava data unti edi use
+anti mi buket em type data avru aceess chsythunaru analyis chysthudhe edi akkad ki move chyali 
+adi glacier ki move chyochu avru a typ data ni access adi akkada unchali andi to
+total information esthudhe ..	 its paid service
+
+nxt
+metric
+anti avaru em access chysthuaru stoge antha utilities iendhe entha mandhe access chysthuaru thn entha data transfer chysthuru e detisld we host wesite
+e details anni mi netic lo vosthudhe okka website unti host chysthi baga use avuthdueh 
+nxt
+inventory
+anti em files unnye uplode chysthru valu em save chysaru andi ela  teleyali anti meru invetry enble chysthi
+evry 1 wk nd daily bases okka shhet vosthudhe palana file unnye s3 buket unnye ani inforamtion vosthudheok
+
+nxt
+ebs-volumes-endhuk-anti servers ki assign chystham
+instance store-mens tempary store
+s3-object store
+============================
+nxt
+glacier vaults lo data uplode chyali anti 2 ways chyvochu 
+1st) s3 lo life cycle plices dawra chyavochu 
+ 1st s3 lo load chystharuthn akkada ncuhi mangent life cycle police use chye glacier move chystharu ok
+nxt manuvalga move or run chyali anti
+we 3rd party tool use 
+2nd way fast glacer tho 
+we use 2nd way we upload nd deelt files ok
+
+
+glacier ----only backup praposs (its tap-drive)
+a data iti change chyamo alati total data ni un-changed data ni glacir lo save chystham
+nxt
+install fast glacier download
+thn
+okka azmn web service ni 3 way s access chyochu
+1)from consle--ki matrm only id passwd tho wrk chysthudhe
+from cli-----
+from application (api)-----e 2 matrm access key and secret access key
+
+nxt
+1st cmdn li aws confugure chyali thn
+acces key and secrt key evali
+nxt
+aws s3 ls  (show all bukets in cmd)
+okka task pettuvochu k (cmnd line tho manuvalga okka doment s3 lo cp chysukochu m)
+edi cp
+aws s3 cp source to destnation
+edi syncu 
+aws s3 sync s3://source_bucket_name s3://new_bucket_name
+ 
+=====================================================================================
+nxt
+
+EFS(ELASTIC FILE SYSTEM) nfs
+ 
+elastic file systm its ntg but nfs(N/W FILE SYSTM) its linux lo iti NFS 
+windows iti shaedflodr
+file sysym cret chyse miru serVr ki evochu k
+thn
+2 instclu crete chyali thn 
+2 floder cret chyali thn 
+mkdir us-east-1
+mkdir us-east-1b
+nxt
+efs lo mount to ec2 dantlo 
+sudo yum install -y amazon-efs-utils
+edi insatll chyali
+nxt
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 10.1.2.143:/ us-east-1
+e ip adress  a nd b kuda ip adress use chyse mount chyali ok
+ntx
+mount iedhe ok thn df -h
+o/p
+us-east- 1
+us-east-1b  list lo vosthaye ok
+
+nxt
+cd us-east-1/
+nxt
+danlto 
+nano test1
+lop hi babay rasi save cm back
+cp tst1 to tst2
+cp test to tst3
+ll
+nxt
+nu ip use chysukoni data save chysukunna adi motam 3 ip ki shar nd save avuthudhe ok
+i men 3 ip s anni kalesi main server ki connect avuthde ok
+nxt 
+qustion anni ip coonet iendhe okka servki kada 
+y we use name thn noream ip adress use cysukochu kada
+y not use ip adress if n casi ip fail iti prblm kada
+so we use name iti name okkti kada imp if na casi 1a faile iti 1b or 1c connect avuthudhe so  
+ip s big hdick so name use chyali ok
+
+
+nxt
+aws storage-gatwy
+anti simply mana on-primsisi unna data ni aws lo move chyali anti we use storgegtwy.nd thorugh gatewy dwara map chysukochu 
+1st)file gate way 2)tap gate way
+mi data centr s lo data dirtga s3 loki save chysikovdam
+for exple apllication srvr diterga s3 lo petadhu so we install  apicat stoge gatywy
+e data aws stoge gatwy pamputhamu thn application server edi loacl servr anukuntudhe
+nfs laga so back endlo iti s3 move chysthudhe thn s3 lo we move glacer   
+ 
+==========================================================
+nxt
+RDS-realation data systm
+STRUTURED DATA BASE  
+1BY 1 UNDALI seuence..ga JST exple empl data
+
+
+>
+okka rds creat chyali
+
+serrvr down iti applicati down ithdhe
+naku anti okka bukup undali okkati pothi  enkoti
+thn dani mida muti az zone rds add  chystha
+thn side by side  enko avalibu lo zone enko copy cretd chysthudhe
+okka ti primary enk 2dry appudu sync lo unntaye
+
+primary nad secord untaye 1st primary c both sybnc lo unntaye data antha
+nxt
+primary down iti automaticga secrdy ki pothudhe ok y anti multi az rds
+nxt
+miru appudu okkadani connect avutharu.
+1st primary coonect avuthuaru thn directga 2ndry ki connect kaleru y anti
+when primary fail iti thn secndy connect avutharu 
+
+enko reporting server run chyali anti thn primary sql rds conntect kavali load akkva paduthudhe
+secodry kadhu if primary faile thn conntd to 2ndry
+load padakunda undali anti replica anti seondry kadhu
+replicaka ant data matrm untadhu thn data sync avthudhe 
+reposrting servrvr dirtga connect kavochu read replica ki
+dirtga prodcutin load  padakunda we use read replicaka\backp 
+nxt
+primary 24/7 kada
+appudu backup secrdy mida run avuthudhe
+
+============
+DYNAMO DB--NO SQL SOULTION -UNSTRUTURED DATTA --WE USE MAILY WEB APPLICATION
+edi key valu tho name=sree tho oprate avuthudhe     sql kakunda enko 
+akkava data handle chydaniki postgresql use chystharu
+AMAZON AURORA MAD MY SQLAND AMRIDB IS ONE FAMILY
+
+masteruser:sandeeprds
+parmetr gropu name:sandeep-rds
+passwd: sandeep-rds123
+
+
+
+
+nxt
+psste in linux 
+mysql -h sandeep-rds.ct547is5yo8g.us-east-1.rds.amazonaws.com -P 3306 -u sandeeprds -p
+
+manm table name 1st estmau rds lo
+nxt
+yum -y install mariadb
+
+nxt
+use awsstudents;
+nxt
+show tables;
+nxt
+CREATE TABLE Students ( StudentID int, LastName varchar(255), FirstName varchar(255), City varchar(255) );
+nxt
+show tables;
+nxt
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "001", "Kumar", "Anil", "Singapore" );
+
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "002", "Reddy", "M", "Hyderabad" );
+
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "003", "Reddy", "N", "Hyderabad" );
+
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "004", "Vel", "D", "Chennai" );
+
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "005", "Student", "Martian", "Mars" );
+nxt
+select * from student;
+nxt
+add in table name
+INSERT INTO Students ( StudentID, LastName, FirstName, City) VALUES ( "001", "kumar", "sandeep", "Singapore" );
+nxt
+cretd one snapshot in database lo action lo velli restore snashot hit chyali
+nxt
+avi fileup chyse db indifitr or inatce lo sanpnsht name evali ok
+nxt 
+a snapshot creat iyaka a snpsht end point copy chysukoni mali..ela chyali ok
+
+a snhp lo secrurite gruop default reove thise sanp-vpc pettali
+thn 
+enko duplicate instacki danlo edi  paste chyali ok
+nxt
+mysql -h sandeep-
+
+-snapshort.ct547is5yo8g.us-east-1.rds.amazonaws.com -p 3306 -u sandeep-rds-snapshort -p
+nxt
+use awsstudent;
+nxt
+show tables;
+nxt
+select * from student;
+nxt
+cretd read-replica in main database ncuhi ok
+nxt
+mali dupicate instance ki same pina laga chyli
+u get tables ok 
+nxt
+
+dynmoDB
+ 
+creat chyali thn danlto same awsstudents and sort lo studentidand  srtig evali opition lo
+thn
+nxt
+okka duplicate instacli lo awscli install chyali ok
+nxt
+cd /tmp
+nxt
+cat > "student001.json" << "EOF"
+{"studentId":{"S":"1"},"studentDetails":{"S":"[{Name:'John Doe',Age:21,Sex:Male}]"}}
+EOF
+
+cat > "student002.json" << "EOF"
+{"studentId":{"S":"2"},"studentDetails":{"S":"[{Name:'Jane Doe',Age:18,Sex:Female}]"}}
+EOF
+
+cat > "student003.json" << "EOF"
+{"studentId":{"S":"3"},"studentDetails":{"S":"[{Name:'Old Mike',Age:881,Sex:''}]"}}
+EOF
+
+cat > "student004.json" << "EOF"
+{"studentId":{"S":"4"},"studentDetails":{"S":"[{Name:'Young Mike',Age:18,Sex:}]"}}
+EOF
+nxt
+ls -ltr
+u get tables ok
+nxt
+aws configure chyali to keys tho
+nxt
+aws dynamodb put-item --table-name awsstudents --item file://student001.json --return-consumed-capacity TOTAL
+aws dynamodb put-item --table-name awsstudents --item file://student002.json --return-consumed-capacity TOTAL
+aws dynamodb put-item --table-name awsstudents --item file://student003.json --return-consumed-capacity TOTAL
+aws dynamodb put-item --table-name awsstudents --item file://student004.json --return-consumed-capacity TOTAL
+nxt
+dynodb lo data vostudhe
+nxt
+put-item =is going to update table
+get-itm= is rteive table
+aws dynamodb get-item --table-name aws-students --key '{"studentId":{"S":"3"}}'
+nxt
+updatdt itm
+aws dynamodb put-item --table-name aws-students --item file://student003.json --return-consumed-capacity TOTAL
+
+
+
+
+======================================================================
+DYNAMO DB--NO SQL SOULTION(not only sql enko data kuda) -UNSTRUTURED DATTA (fb twittr) --WE USE MAILY WEB APPLICATION
+sql kakunda enko
+table ela cretd chyli ani chpathmu
+games 5 clumes --name, poins, stage
+edi maily use 
+games web applicaton adds kosam we use dynono db 
+
+iot and adds kosam  dynodb use nxt
+data werhouse lo
+akkava data handle  chydaniki postgresql use chystharu
+orcle sql anidi high erp akkava perfrmns custmstm relition 
+AMAZON AURORA MAD MY SQLAND AMRIDB IS ONE FAMILY
+web apllction use chystharu
+chinna addrs chyadaniki use chystharu
+
+============================================
+aws-dynmo-DB
+ is no sql data base its wrk as key value pair 
+nam=sree (key value)
+we mainly used 
+load data dynamodb
+exple
+okaa game lo chali client s unataru
+andhru okkasri game aduthunaru
+okka game application appudu
+okka ec2 servr lo run avutdhe
+thn client andhru 1st ec2 ki conntct avutharu
+nxt
+ec2 okka role creat chyse daniki untadhe thn
+adi ditrga conntct avuthudhe dynmodb th data rasthudhe k  
+nxt
+servless artcheru anti dynmo db imp role save chyadaniki
+mundhu multiple ec2 run chayli anti use elb --ec2--dynomdb 
+nxt
+DAX akkava fast kavali anti
+
+============================================================
+ alarams
+3 untye
+=============================================
+aws cloud watch logs
+
+advancd okka servr undhe miru cloud watch manitring chyshtudhe bt lopal em runing u don"t no right
+1st cretd 1 instacne chysanu thn
+e nginx website server monietr chyali anti dentlo awslogs clinet install 
+awslogs  ec2 ki  push chyali awslogs ki  we need rights to push 
+undali thn we can cretd 1 iam role
+dantlo perrmisn lo
+cloud wtchlogsfull acess evali
+nxt
+ec2 instancki apply chyali a 
+
+
+roleni
+ nxt
+instal lo loag instals chyali
+yum install awslogs -y
+thn
+ls /etc/awslogs/
+nxt
+cd /etc/awslogs/
+nxt
+service awslogs status
+service awslogs statrt
+nxt
+find / -name *.log 
+o/p
+/var/log/nginx/error.log
+/var/log/nginx/access.log
+
+e fils  manitoring chyali
+nxt
+nano awslogs.conf
+dantlo evi paste chyali
+
+[/var/log/access]
+datetime_format = %b %d %H:%M:%S
+file = /var/log/nginx/access.log
+buffer_duration = 5000
+log_stream_name = {instance_id}
+initial_position = start_of_file
+log_group_name = AccesslogsNginx
+
+
+[/var/log/nginx/error]
+datetime_format = %b %d %H:%M:%S
+file = /var/log/nginx/error.log
+buffer_duration = 5000
+log_stream_name = {instance_id}
+initial_position = start_of_file
+log_group_name = ErrorlogsNginx
+ntx
+sudo systemctl start awslogsd
+sudo systemctl status awslogsd
+
+refrsh chyali 
+nxt
+nu  logs s velthi 2  logs groups untaye
+accesslogmginx
+errologmginx
+nxt
+instance id chupichali nad dani lopali ki velthi manm acces log lopaliki check chyli evaru 
+akkadi nuchi acees chysthuaru motham details untaye
+okka log file manitor chyali anti we use cloud watch access log lo manitring chyochu 
+nxt
+metric s endhukanti suspicus ip avru akkadi ncuhi acces chysthuunaru ani we cn find
+nd e ip nuchi avaru acess iti naku mail ravli anti man config chysukovchu
+e metric use chysukoni
+ok 
+nxt
+assign metric anti e ip nchi avaru acess chysena manaku mail vosthdhe
+ok adi alrt laga alram set chysukovali 
+nxt
+a metric s manm  cret chyse thn alaram set chyali ok
+okka vela e ip ncuhi >=5 reqeust vosthi naku mail vosthudhe
+
+https://github.com/satterly/AWSCloudformation-samples
+===============================================================
+events 
+2 typs 
+event:
+nthg nenu oka role cretd vochu  naku okka ec2-instance stop chysena start ela evnets  chysena adi event ki trigar avuthudhe
+thn ala trigar iynappudu em chyali anidi manam taget lo estham(ec2 cretd snashot api esthm dani kinda volum id evali ok)
+adi enti anti intstnace stop start chsythi automatiga okka snapshot theyali ani
+manam traget gruop lo echmu ok
+thn 
+manam stop chysamu instance
+
+rules:okka alrem trigar avali its only backups
+
+sheadule
+aws antive backup is snapshot backups
+lo ec2 use chyaradhu k tthn we lamba function use chystham and dani kida ec2-backup esthm(lamda lo a name esthi a name vosthudeh )
+20 * * * * (crown)
+nxt add target lo lamda evali (automatic chayli)
+
+lamda
+is sever lekunda okka scrpit ni exect or run chysthudhe manm echi scrpt
+scrpt entha manchiga unti antha baga wrk chsthudhe
+nxt
+okka function crete chsye okka function cretd chyali thn datlo okka code paste chyali nd save nd test
+
+thn avrki instane tag backup ki yes untadho valiki a servrki snapshot cret avuthaye 
+nxt
+lambda lo okka scrpt evali and a scrpt unna instace id and lambda echena srct lo instace ip same undali
+ok thn a server name  tho okka snapshot creat avuthudhe ok
+  
+nxt
+lamda lo scecssful iena scrpt 
+mali cloud-watch lo shedule ki taget group lamda echi add chyali
+thn akada pop up avuthudhe 
+nxt
+rule
+creatd chayli thn avraki tag yes untadho vala a servki abckup avuthaye 
+ok
+thn nenu both yes peduthanu
+
+nxt
+aslu lamda finction wrk ithudha or ledha ni telusu kovadniki we fix rate option
+eppudua em avuthudhe evry 1 min trigar avuthudhe thn automatiga lambda function trigar avuthdhe
+lambda em chysthudhe anti a scrpt run chyshtudhe thn avarki itit yes undhao vala servrki okka snashot 
+esthudhe ok
+
+volume to sanpshit thn img to instace
+
+snapshot nuchi restore chyalemu
+ok
+snahp shot nuchi okka volume crest chyse thn a server ki add chystham adi data iti ok
+bt thihg na instace or servr delete so
+a server ni restor chyali anti snapshot nuchi okka img thn img to instace 
+that is restore d server  
+-------------------------------------------------------------------------
+nxt
+cloudfromation   --(valax techmoly see d link)
+anti simply infrasture as a code  (IAAC)
+bt big enviroment chala config anukondi manuvgla chyadam kastm edi  1 time activity chyse evachu 
+mutple location deply chyali thn same code 
+same infratd same envrimnt deplyment chyali konni sarlu 
+miru delpment team support chysthunappudu same infrasture evry wk test chyatharu repetd rk iti we use cludffin 
+evry 1 wk mali remove chyse mali enviroment deply chyli
+
+y we use culodfn
+1.repetd work .dev team
+2.deployeing in multiple location and needs to be identified json or yml
+nxt
+clud fn drwback
+1.cf is in jason   and littl complex
+2.cf is slow its time taken
+3.existing device or new device outside cf cannot be mange with cf
+4.cf lo detaild plan is not visible
+terrform is vry fast
+multiple ki tmp plts untaye
+
+parametrs==input
+
+stack
+okka cludffin cret chyadam
+stacck set
+1st admin permisin thsekovali 
+multiple location cludfn crtd chydam
+nxt
+desig tmpl
+own ga design chydam
+nxt
+exit resource undhe unna tmple convet chyse thn atmple lo webservr add chyse deply chyvochu its lunch  
+nxt
+meku enko subnt lo kavali anti
+adi tmple edit chyasukoni 
+save
+thn publi subt motham copy chyse 
+dani enko copy petti a page  paste chyali
+nxt
+appudu replicment false undali
+true anti taotlga delet chye new crtd chysthude
+nxt
+cloud trial 
+anti mi a/c ni avru acess chythunaru akkad nuchi acess chyastharu anni inforamtion ekkada untadhe avaru acess chyathnu anni untaye edi appudu use 
+ithadhe anti adutr voche
+palana data appudud oka dut kavli anti adi use avuthdhe
+endhukati fincal compny okka adult vochinappudulo aavru ala acess chysthunaru ani ela telusuthdhe anti appudu e log s manm evali anamta e mandhya 90 inces chyaru
+fincl compny 7 years unadli 
+
+
+
+nxt
+aws config
+100 sevr lo avaru akka okka ru amnge chystharu avru okka ru chagnes chystharu e wkd okka big change undhe pacths some chamge unye bt
+wknd change iyaka  
+mndy iyka change implementd on wknd and on mondy apllication is not wrking
+nxt
+thn chge team aduguthudhe miru em chysaru ani
+some chnge chysaru ani bt 
+valu em change chesaru ani wht proff k thn ela telusuthudhe
+daniki kosam we use aws config
+edi basic ga recrd chysthudhe ok em chges jaruguthudhe ani
+nxt
+okk rule thn 	recrding 
+recrd on chsthi all recrd avuthaye bt edi o evrthy thing many paduthudhe
+aws config rule -
+comliance--chpindhe vadaledha or chyalidhu anukondi 
+valu manku telsepothudhe
+aws config 2 typs chysthudhe--
+1.st mana envirment antha cheack chyse thn manam a resource iti chpamu vatini recrd chsythudhe thn em ana chages unyee ani
+2.comliamce kosam ani  reules
+nxt
+
+amzn  okka dns sytm ni 
+rout53 antam
+main use of
+route 53 tho own dns ni magnet chysukochu k
+name to ip resolution chysthudhe
+emplki
+dns ki connetc www.google.com mi degara undhe ani naku esthudhe
+miru bayta petukovadm kanti miru rot53 lo dsn sytm pettukochochu
+nxt
+edi lode balnce chsythude k
+laod balnc can balncy load btwn AZ only okka region lo avalabulis unnataye
+
+
+nxt
+2 region s lo load blnc wrk avadhu
+1st
+okka ec2 n.vign lo
+enko ohio lo ec2 instamnce chyali thn both nginx servr install chyali ok
+nxt
+2 two laod balnce cretd chyali thn 
+nxt
+route53 opn chyse thn freename lo domain regstry kavli nd nameserve rlo a id paste chyese save chyli
+nxt
+
+
+simple:
+nxt
+weight anti:2 instanc eunnye amotham triic okka daniki send chyakunda okka daniki 10 % and 2nd ki 90% pampadam
+nxt
+latncy:2 instance lo okkati dehli lo undhe enko uppalo undhe ok2 region s unnaru kada dehli vadu uppalki connect avthuaniki try chysthunadu
+bt kaledu nxt upapl deli connecting kalidu neku degara undhe connet avuthudhe
+nxt
+failover:
+okka site fail iti enko site ki vellai ani 
+2 servcrs unnnye bt okka daniki suddnly stop iendhe nxt 2nd servr ki connrtc avuhtudhe trafic ok
+nxt
+geolocation
+10 server sunnye meru india lo unti mi servr idiaki velthudeh (geloaction enble chysthi)
+us -trifc us ki pothahe nad eurap trifc erup ki pothadhe k
+degara ga unna locationki pothudhe ok avri regin variki
+
+a-ipv4 ni --host recrd anatru
+alias recrd ni--cname-recrd antaru
+
+
+
+
+
+
+nxt
+crtd rerd set anti differt set untaye
+alias recrd ni C-name recrd antaru
+ A recrd ni -host recrd antaru
+ mx-mailing recrd
+========================================
+IAM
+IDETITI ACCES MANGEMTN
+avaru mana envirmt acees chyali ela nad elati sg undali we spifiy rule and anni permmisin s evakakudhu esthi avaru padithi avaku vochi delet chystharu so ala evadkudhu
+aws ni access chyali anti 3 typs
+1.from aws consloe
+2.using CLI  AND cmdprmt (aws config)
+3.from api/sdk (using devper smiru okka apication vochi devpl chyali most devlp)
+em avdini ekkad permisin kavali k
+nxt
+users and groups --endhuku anti
+from admins and user s who want to manager AWS using console,CLI & APIs
+mana lati noraml user s kosam THOugh application dwara   acess chyali anti
+we use users and groups
+mens from admins and users who want to manager aws using consloe,CLI AND API
+ 
+nxt :imp
+ROLES:andhi service kosam enko a/c nuchi loging chyaliti
+its used one aws service to access other aws service
+itsa also used by user when loging into the diffeertn account 
+
+(linux)RBAC:role base access control
+(nenu okka role crttd chystha thn okka user ki 10 servs access 
+chyli ani rules estnu so okkadiki vosthaye)
+
+nxt 
+poiloces
+user s gani roels em perimison evali users gani roles gani evaru
+em  access chyali thn polices  ani permisin apply cyali
+
+and polices em apply chysthamo thn usrs and
+roles kuda avi apply avuthye ok(pemision s)
+nxt
+user access evalanti 
+test user cretd chstham k thn groups ki perrmision
+s estam y becus group delet chyam kada 
+thn okka kotha user vochi nnapudu vadini add chytham k
+thn user group cretd chystham
+nxt
+1st police cretd chyali nd json copy (name:retic-user-us-east-1)
+chese
+crete police lojson seleltc chyse dantlo paste chyali thn creat police
+nxt
+okka test unser cret chyali
+thn aws mangent console access evali thn custm passwd thn creat user ok
+nxt
+group cret chytali (NAME:us-east-1-admin)
+nxt
+eppudu manam creat chysena police s apply chyali k adi (retic-user-us-east-1)
+nxt
+mali gruop lo 
+us-east-1-admin ki testuser-1 ni add chystham right clink add users to group
+nxt
+edi only useast user login avuthdhe enko browesrs lo opn chyali dahsod link k
+nxt
+user :testuser-1 
+pas:san123
+enrty iye okaa ec2 crt chyali ok
+nxt
+a ec2-puuty lo coonetct kavli thn 
+aws configure chyali
+nxt access key secrt key evali nxt
+aws s3 ls (all buket s vosthaye)
+
+ela creditioal evadm valla okka prblem undhe adi enka avriki anna e srvr ki acces undhe anukondi vallu
+em chyvochu anti mana cridtes anni telsei pothudhe esyga acces keys  save avuthudhe enko person entry kavochu k
+nxt
+cd .ssh/
+nxt
+ls
+nxt
+cd ..
+nxt
+cd .aws/
+nxt
+ls
+nxt
+cat credentials
+anni kanipisthye mana crditials access keys anni ok no security  k
+nxt
+ela kankanunda mana id passd evakunda thn role use chysukoni em ana chyavocha s we do
+ela nti 
+nxt
+OKKA ROLE CREST CHYALI THN permison lo s3 full evali thn role s3-full-acess-ec2
+nxt
+its mens e role avriki ec2 iti esthano or assing chysthano tanaki a ec2 ki full rights unnye antu
+nxt
+cd ..
+nxt
+rm -rf .aws/*
+nxt
+aws s3 ls
+nxt
+main aws accout lo ec2-lo right clink echi  attach//replce iam role anti enshka okka role crate chyasmu kad
+adi (s3-full-acess-ec2) adi adi ekkada vosthude k
+nxt
+appuduna nu role ela apply chsythi meku okka tempary crditionlsa esthudhe a role thn adi use chysukoni edi check chsthudhe
+ok a role kodesepu untahde tarvtha delet avuthde ok 
+thn id passd evakunda ela role tho amnge chyavochu
+
+avi tmp tempary crditionlsa akkada unnye anti cheack chyali anti use cmdn
+cmnd:curl http://169.254.169.254/
+nxt
+curl http://169.254.169.254/latest/
+dantlo meta datat
+nxt
+curl http://169.254.169.254/latest/meta-data
+nxt
+curl http://169.254.169.254/latest/meta-data/iam/
+info
+nxt
+curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
+nxt
+curl http://169.254.169.254/latest/meta-data/iam/security-credentials/S3-AULL-ACCESS-EC2
+u wll get all access key secrit key
+ela telusukovhu 
+nxt
+sandp aws a/clo unna test user enko santhosh aws /ac lo unna service ni acces chyali
+edi 2 typs chyvochu
+1.enko uid and passd crest chyvochu bt 8000 a/c unti 
+2. croess a/c contctin anotehr aws a/c
+daniki
+sandp aws a/clo nuber ni santhosh aws lo iam lo role s lo creat role ani dantlo antother aws a/c ani a sanp aws a/c numbr 
+ekkada esthnau ok
+nxt
+permissin esthnau user ki adminstry acces kavali or ec2 full acccess
+nxt rolename-i belive-santhosh
+nxt
+akakd role arn copy cyse thn test user ki assign chyali
+nxt
+sanp lo okka polices cret chyali 
+nxt
+sanp role lo testuser -1 velli add perimisti ani police ski velli a police ni pick chysukovali ok add permistion  ananli 
+nxt
+santhosh ki  vochi a testuser santhosh a/c lo wrk avuthahde ledha telusukovali
+nxt
+diterga acces kalidu thn sanp ki velli a test user 1 loginiye thn
+tanu em chyaledu jst see and em creat chyaledu
+thn em chyali anti
+switach role anali ok
+nxta/c 
+role ,dipslr rolea switach role anti ventaniki swicth avli k
+nxt thn we wl see d 2 aws a/c s  k
+> naku 200 a/c unna  okka user creat chsythanu a role valiki esthanu ok
+wrk easy avuthde k
+ala wsitch use avuthdhe k
+nxt
+
+back vellali anti switch user k
+nxt
+ mali daniki vellanti mali awitch user anali k
+
+
+========================================
+nxt
+cloud front--okka cdn n/w (containt devlery n/w)
+okka website cloud front peduthi wrold antha chusthudhe
+
+fallover -okka site fail iti enko site vella
+geo location -edi iti degagra untadho daniki velthuhde
+10 servers  unyea nti geo-laoction enlble chysthi
+i mens india lo unti india server ki connect avuthudhe
+ok
+
+nxt
+api
+frent end lo webservr lekunda chysthudhe
+hotal lo
+custmr ---weiter----kitach
+client 
+acess dynnodb 
+
+waiter -api gategy
+
+kitach-lamda-scrpt execut chysukonu th lamda em chpthudhe anti scrpt exec chyse thn dynodb nuchi data esthudhe
+this sevrless artech.
+
+post --anti edit chydam
+
+
